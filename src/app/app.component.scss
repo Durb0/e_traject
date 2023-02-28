@@ -1,0 +1,16 @@
+:host{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  //media when width is less than height
+  @media screen and (orientation: portrait) {
+    flex-direction: column-reverse;
+
+    app-form{
+      width: 100%;
+      height: 200px;
+      flex-direction: row;
+    }
+  }
+}

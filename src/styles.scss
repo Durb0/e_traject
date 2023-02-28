@@ -1,1 +1,27 @@
+
 /* You can add global styles to this file, and also import other style files */
+body{
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+$Luxury-Escapes-Visual-Language-1-hex: #2A4759;
+$Luxury-Escapes-Visual-Language-2-hex: #687E8C;
+$Luxury-Escapes-Visual-Language-3-hex: #B4CED9;
+$Luxury-Escapes-Visual-Language-4-hex: #73440A;
+$Luxury-Escapes-Visual-Language-5-hex: #BFBCBA;
+
+
+:root{
+  --light: #B4CED9;
+  --main: #687E8C;
+  --dark: #2A4759;
+}
+
+/* Color Theme Swatches in Hex */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

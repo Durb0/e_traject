@@ -1,0 +1,17 @@
+:host{
+  background: var(--main);
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 0;
+}
+
+.map-frame {
+  height: 100%;
+  overflow: hidden;
+}
+
+#map {
+  height: 100%;
+}
