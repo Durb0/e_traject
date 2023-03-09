@@ -1,0 +1,8 @@
+<app-toolbar>
+  <mat-form-field>
+    <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup.enter)="search()">
+  </mat-form-field>
+  <div class="cars">
+    <app-car *ngFor="let car of cars" [car]="car"></app-car>
+  </div>
+</app-toolbar>

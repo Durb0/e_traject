@@ -1,40 +1,25 @@
-<form [formGroup]="trajectForm" class="form" (ngSubmit)="onTestButton()">
 
-  <h3>Départ</h3>
-  <form formGroupName="start" class="form__coords">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>lon</mat-label>
-      <input type="number" matInput formControlName="x">
+<app-toolbar>
+  <form [formGroup]="trajectForm" class="form" (ngSubmit)="onValid()">
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Depart</mat-label>
+      <input type="text" (keyup)="onFormChange('start')" matInput formControlName="start">
+      <mat-icon matSuffix color="accent" (click)="focus('start')">room</mat-icon>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>lat</mat-label>
-      <input type="number" matInput formControlName="y">
+    <mat-form-field class="example-full-width">
+      <mat-label>Arrive</mat-label>
+      <input type="text" matInput (keyup)="onFormChange('finish')" formControlName="finish">
+      <mat-icon matSuffix color="primary" (click)="focus('finish')">room</mat-icon>
     </mat-form-field>
 
-    <button mat-fab color="primary" (click)="test()">
-      <mat-icon>room</mat-icon>
+    <button mat-flat-button type="submit">
+      <mat-icon>calculate</mat-icon>
+      Calculate
     </button>
+
   </form>
 
-  <h3>Arrivée</h3>
-  <form formGroupName="finish" class="form__coords">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>lon</mat-label>
-      <input type="number" matInput formControlName="x">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>lat</mat-label>
-      <input type="number" matInput formControlName="y">
-    </mat-form-field>
-    <button mat-fab color="accent">
-      <mat-icon>room</mat-icon>
-    </button>
-  </form>
-
-  <button mat-flat-button color="primary" type="submit">Calculate</button>
-
-</form>
-
-<h2>{{this.result || "No result"}}</h2>
+  <h2>{{this.result || ""}}</h2>
+</app-toolbar>

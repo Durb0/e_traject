@@ -6,32 +6,16 @@ import {MapService} from "../../services/map/map.service";
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit, AfterViewInit{
+export class MapComponent implements OnInit{
   private map!: L.Map;
 
   constructor(
     private mapService: MapService
   ) {}
 
-  private initMap(): void {
-    this.map = L.map('map').setView([51.505, -0.09], 13);
-
-
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-
-    tiles.addTo(this.map);
-    this.mapService.setMap(this.map);
-  }
 
   ngOnInit(): void {
-
-  }
-  ngAfterViewInit(): void {
-    this.initMap();
+    this.mapService.initMap("map", [45.1842884, 5.6805206], 13);
   }
 
 

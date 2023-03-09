@@ -1,0 +1,15 @@
+@import "src/styles";
+
+:host{
+  margin: 25px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  border-radius: 5px;
+  @include glass;
+}
