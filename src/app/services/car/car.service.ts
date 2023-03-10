@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo, ApolloBase, gql} from "apollo-angular";
 import {map, Observable} from "rxjs";
 import {Car} from "../../model/car";
+import { selectedCar} from "../../utils/store";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import {Car} from "../../model/car";
 export class CarService {
 
   private apollo: ApolloBase;
+
 
   generateQuery(searchTerms: string = ""){
     return gql`
@@ -76,5 +78,20 @@ export class CarService {
     );
   }
 
+  observeSelectedCar(): Observable<Car>{
+    return selectedCar.asObservable();
+  }
+
+  getSelectedCar(): Promise<Car>{
+    return new Promise((resolve, reject) => {
+      selectedCar.subscribe((car: Car) => {
+        resolve(car);
+      });
+    });
+  }
+
+  selectCar(car: Car){
+    selectedCar.next(car);
+  }
 
 }

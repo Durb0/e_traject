@@ -19,8 +19,7 @@ export class TrajectService {
   url = "http://localhost:8000"
 
 
-
-  calculateTraject(start_lng:number,start_lat:number,finish_lng:number,finish_lat:number){
+    calculateTraject(start_lng: number, start_lat: number, finish_lng: number, finish_lat: number, range: number){
     const body = `
     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spy="spyne.examples.hello.soap">
     <soapenv:Header/>
@@ -34,6 +33,8 @@ export class TrajectService {
                 <spy:finish_lng>${finish_lng}</spy:finish_lng>
                 <!--Optional:-->
                 <spy:finish_lat>${finish_lat}</spy:finish_lat>
+                <!--Optional:-->
+                <spy:range>${range}</spy:range>
             </spy:calculate_traject>
         </soapenv:Body>
     </soapenv:Envelope>`

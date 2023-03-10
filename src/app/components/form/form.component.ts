@@ -5,9 +5,10 @@ import {MapService} from "../../services/map/map.service";
 import * as L from "leaflet";
 import {DistanceService} from "../../services/distance/distance.service";
 import {LocalisationService} from "../../services/localisation/localisation.service";
-import {CarService} from "../../services/car/car.service";
 import {MatDialog} from "@angular/material/dialog";
 import {Subscription} from "rxjs";
+import {CarService} from "../../services/car/car.service";
+import {Car} from "../../model/car";
 
 @Component({
   selector: 'app-form',
@@ -16,12 +17,13 @@ import {Subscription} from "rxjs";
 })
 export class FormComponent implements OnInit {
   result: number = 0;
-
+  selectedCar!: Car;
   trajectForm: FormGroup = new FormGroup({});
 
   //subscriptions
   distanceSubscription!: Subscription;
   proposalSubscription!: Subscription;
+  selectedCarSubscription!: Subscription;
 
 
   constructor(
@@ -30,12 +32,15 @@ export class FormComponent implements OnInit {
     private map_:MapService,
     private distance_:DistanceService,
     private localisation_:LocalisationService,
-    private dialog_: MatDialog,
+    private car_: CarService,
   ) { }
 
   ngOnInit(): void {
     this.distanceSubscription = this.distance_.getDistance().subscribe((data) => {
       this.result = data;
+    });
+    this.selectedCarSubscription = this.car_.observeSelectedCar().subscribe((data) => {
+      this.selectedCar = data;
     });
     this.trajectForm = this.formBuilder.group({
         start: ["",[Validators.required]],
@@ -56,7 +61,7 @@ export class FormComponent implements OnInit {
       let start_lat = startMarker.getLatLng().lat;
       let finish_lng = finishMarker.getLatLng().lng;
       let finish_lat = finishMarker.getLatLng().lat;
-      this.traject_.calculateTraject(start_lng,start_lat,finish_lng,finish_lat);
+      this.traject_.calculateTraject(start_lng,start_lat,finish_lng,finish_lat,this.selectedCar.range);
     }
   }
 
@@ -96,5 +101,6 @@ export class FormComponent implements OnInit {
     //unsubscribe from all subscriptions
     this.distanceSubscription.unsubscribe();
     this.proposalSubscription.unsubscribe();
+    this.selectedCarSubscription.unsubscribe();
   }
 }

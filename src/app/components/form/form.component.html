@@ -14,6 +14,8 @@
       <mat-icon matSuffix color="primary" (click)="focus('finish')">room</mat-icon>
     </mat-form-field>
 
+    <app-car *ngIf="selectedCar" [car]="selectedCar"></app-car>
+
     <button mat-flat-button type="submit">
       <mat-icon>calculate</mat-icon>
       Calculate

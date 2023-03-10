@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
-//import Routing from 'leaflet-routing-machine';
 import * as L from "leaflet";
 import {icon, Icon, LatLng, LatLngExpression, Map, Marker, TileLayer} from "leaflet";
 import "leaflet-routing-machine";
-import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'

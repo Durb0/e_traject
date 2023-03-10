@@ -5,8 +5,13 @@
   padding: 5px;
   display: block;
   cursor: pointer;
+  background: linear-gradient(45deg, rgb( 41, 41, 41 ), transparent);
 
   &:hover{
     background: rgba(21,21,21,0.5);
+  }
+
+  &.selected{
+    background: rgb( 41, 41, 41);
   }
 }

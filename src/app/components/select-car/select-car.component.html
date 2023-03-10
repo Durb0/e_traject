@@ -3,6 +3,11 @@
     <input matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup.enter)="search()">
   </mat-form-field>
   <div class="cars">
-    <app-car *ngFor="let car of cars" [car]="car"></app-car>
+    <app-car
+      *ngFor="let car of cars"
+      [car]="car"
+      (click)="selectCar(car)"
+      [ngClass]="{'selected': isCarSelected(car)}"
+    ></app-car>
   </div>
 </app-toolbar>
