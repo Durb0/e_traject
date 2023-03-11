@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map} from "rxjs";
+import {map, timeout} from "rxjs";
 import {DistanceService} from "../distance/distance.service";
 import {MapService} from "../map/map.service";
 
@@ -21,9 +21,16 @@ export class TrajectService {
 
     calculateTraject(start_lng: number, start_lat: number, finish_lng: number, finish_lat: number, range: number){
 
-      const headers = new HttpHeaders()
-        .set('Content-Type', 'text/xml')
-        .set('SOAPAction', '${this.url}/calculate_traject');
+
+
+      const headers = new HttpHeaders({
+        'timeout': '100000',
+      });
+
+      const options = {
+        responseType: "text" as "json",
+        timeout: 100000,
+      }
 
 
     const body = `
@@ -45,7 +52,8 @@ export class TrajectService {
         </soapenv:Body>
     </soapenv:Envelope>`
     //soap request to localhost:8000
-      this.http.post<any>(this.url, body, {responseType: "text" as "json"}).pipe(
+      this.http.post<any>(this.url, body, options).pipe(
+        timeout(100000),
         map(
           (value) => {
             //on a une lists de liste de float, il faut convertire ça en liste de tubple de float

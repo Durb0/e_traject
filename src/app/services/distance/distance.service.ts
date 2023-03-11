@@ -11,7 +11,7 @@ export class DistanceService {
     private http: HttpClient
   ) { }
 
-  apiUrl = "http://localhost:3000/distance"
+  apiUrl = "https://rest-express.vercel.app/distance"
 
   calculateDistance(start_lng:number,start_lat:number,finish_lng:number,finish_lat:number){
     this.http.get(this.apiUrl, {
