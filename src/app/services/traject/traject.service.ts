@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map} from "rxjs";
 import {DistanceService} from "../distance/distance.service";
 import {MapService} from "../map/map.service";
@@ -16,13 +16,19 @@ export class TrajectService {
     private mapService: MapService
   ) { }
 
-  url = "http://localhost:8000"
+  url = "https://ws-python.vercel.app"
 
 
     calculateTraject(start_lng: number, start_lat: number, finish_lng: number, finish_lat: number, range: number){
+
+      const headers = new HttpHeaders()
+        .set('Content-Type', 'text/xml')
+        .set('SOAPAction', '${this.url}/calculate_traject');
+
+
     const body = `
-    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spy="spyne.examples.hello.soap">
-    <soapenv:Header/>
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spy="info.802.traject.soap">
+        <soapenv:Header/>
         <soapenv:Body>
              <spy:calculate_traject>
                 <!--Optional:-->
@@ -43,7 +49,6 @@ export class TrajectService {
         map(
           (value) => {
             //on a une lists de liste de float, il faut convertire ça en liste de tubple de float
-            console.log(value)
             let parser = new DOMParser();
             //get tns:calculate_trajectResult
             let xml = parser.parseFromString(value, "text/xml");

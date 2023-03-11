@@ -53,6 +53,5 @@ export class SelectCarComponent implements OnInit {
 
   selectCar(car: Car) {
     this.car_.selectCar(car);
-    console.log(car);
   }
 }

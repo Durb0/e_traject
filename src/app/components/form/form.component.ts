@@ -69,9 +69,7 @@ export class FormComponent implements OnInit {
     let value = this.trajectForm.get(form)?.value;
     if(value.length > 3){
       //this.proposalSubscription?.unsubscribe();
-      console.log("subscribe");
       this.proposalSubscription = this.localisation_.getProposal(value).subscribe(async (data: Array<any>) => {
-        console.log(data);
         if (data.length == 0) return;
         let result = data[0];
         //first remove all markers with the form name
