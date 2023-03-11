@@ -27,7 +27,7 @@ export class TrajectService {
 
 
     const body = `
-    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spy="info.802.traject.soap">
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spy="info.802.traject.soap">\
         <soapenv:Header/>
         <soapenv:Body>
              <spy:calculate_traject>
@@ -40,7 +40,7 @@ export class TrajectService {
                 <!--Optional:-->
                 <spy:finish_lat>${finish_lat}</spy:finish_lat>
                 <!--Optional:-->
-                <spy:range>${range}</spy:range>
+                <spy:autonomy>${range}</spy:autonomy>
             </spy:calculate_traject>
         </soapenv:Body>
     </soapenv:Envelope>`
