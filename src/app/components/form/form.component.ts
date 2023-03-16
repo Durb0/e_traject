@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TrajectService} from "../../services/traject/traject.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MapService} from "../../modules/map/map.service";
 import * as L from "leaflet";
 import {DistanceService} from "../../services/distance/distance.service";
 import {LocalisationService} from "../../services/localisation/localisation.service";
-import {MatDialog} from "@angular/material/dialog";
-import {Subscription} from "rxjs";
+import {map, Subscription} from "rxjs";
 import {CarService} from "../../modules/car/car.service";
 import {CarModel} from "../../modules/car/car.model";
+import {BorneService} from "../../services/borne/borne.service";
 
 @Component({
   selector: 'app-form',
@@ -33,6 +33,7 @@ export class FormComponent implements OnInit {
     private distance_:DistanceService,
     private localisation_:LocalisationService,
     private car_: CarService,
+    private borneService: BorneService,
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +62,18 @@ export class FormComponent implements OnInit {
       let start_lat = startMarker.getLatLng().lat;
       let finish_lng = finishMarker.getLatLng().lng;
       let finish_lat = finishMarker.getLatLng().lat;
-      this.traject_.calculateTraject(start_lng,start_lat,finish_lng,finish_lat,this.selectedCar.range);
+      this.borneService.getBornesBetween(start_lng,start_lat,finish_lng,finish_lat).pipe(
+        map((data: any) => {
+          //get geometry
+          return data.map((item: any) => {
+            return item.geometry.coordinates;
+          });
+        }
+      )).subscribe(
+        (data: any) => {
+          this.traject_.calculateTraject(start_lat,start_lng,finish_lat,finish_lng,this.selectedCar.range, data);
+        }
+      );
     }
   }
 
