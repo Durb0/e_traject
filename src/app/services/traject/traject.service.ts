@@ -17,8 +17,8 @@ export class TrajectService {
     private mapService: MapService
   ) { }
 
-  //url = "https://ws-python.vercel.app/?wsdl";
-  url = "http://localhost:8000/?wsdl"
+  url = "https://ws-python.vercel.app/?wsdl";
+  //url = "http://localhost:8000/?wsdl"
 
 
   calculateTraject(start_lat: number, start_lng: number, finish_lat: number, finish_lng: number, range: number, bornes: any[]){
