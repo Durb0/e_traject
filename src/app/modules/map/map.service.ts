@@ -15,6 +15,8 @@ export class MapService {
   private map!: Map;
   private markers: Marker[] = [];
 
+  private route?:L.Routing.Control;
+
   createIcon(name: string): Icon {
     return icon({
       iconUrl: `assets/${name}.png`,
@@ -76,12 +78,10 @@ export class MapService {
   }
 
   setRouting(coords: number[][]){
-    //first remove all layers with the name routing
-    this.map.eachLayer((layer) => {
-      if (layer != this.tiles) {
-        this.map.removeLayer(layer);
-      }
-    });
+    //remove previous routing
+    if(this.route){
+      this.route.remove();
+    }
 
     let lineOptions = {
       styles: [{color: 'paleturquoise', opacity: 1, weight: 5}],
@@ -98,14 +98,16 @@ export class MapService {
 
 
 
-    L.Routing.control({
+    this.route = L.Routing.control({
       waypoints: latlngs,
       //refuse to add waypoints
       addWaypoints: false,
       routeWhileDragging: false,
       lineOptions: lineOptions,
       plan: plan
-    }).addTo(this.map);
+    });
+
+    this.route.addTo(this.map);
   }
 
   removeMarkers(form: string) {

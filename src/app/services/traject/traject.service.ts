@@ -16,21 +16,21 @@ export class TrajectService {
     private mapService: MapService
   ) { }
 
-  url = "https://ws-python.vercel.app"
+  url = "https://ws-python.vercel.app/?wsdl";
 
 
-    calculateTraject(start_lng: number, start_lat: number, finish_lng: number, finish_lat: number, range: number){
+  calculateTraject(start_lng: number, start_lat: number, finish_lng: number, finish_lat: number, range: number){
 
 
 
-      const headers = new HttpHeaders({
-        'timeout': '100000',
-      });
+    const headers = new HttpHeaders({
+      'timeout': '100000',
+    });
 
-      const options = {
-        responseType: "text" as "json",
-        timeout: 100000,
-      }
+    const options = {
+      responseType: "text" as "json",
+      timeout: 100000,
+    }
 
 
     const body = `
