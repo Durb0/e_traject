@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {TrajectService} from "../../services/traject/traject.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MapService} from "../../services/map/map.service";
+import {MapService} from "../../modules/map/map.service";
 import * as L from "leaflet";
 import {DistanceService} from "../../services/distance/distance.service";
 import {LocalisationService} from "../../services/localisation/localisation.service";
 import {MatDialog} from "@angular/material/dialog";
 import {Subscription} from "rxjs";
-import {CarService} from "../../services/car/car.service";
-import {Car} from "../../model/car";
+import {CarService} from "../../modules/car/car.service";
+import {CarModel} from "../../modules/car/car.model";
 
 @Component({
   selector: 'app-form',
@@ -17,7 +17,7 @@ import {Car} from "../../model/car";
 })
 export class FormComponent implements OnInit {
   result: number = 0;
-  selectedCar!: Car;
+  selectedCar!: CarModel;
   trajectForm: FormGroup = new FormGroup({});
 
   //subscriptions

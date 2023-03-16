@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {map, Observable, Subscription} from "rxjs";
-import {CarService} from "../../services/car/car.service";
-import {Car} from "../../model/car";
-import {selectedCar} from "../../utils/store";
+import {Subscription} from "rxjs";
+import {CarService} from "../../car.service";
+import {CarModel} from "../../car.model";
 
 @Component({
   selector: 'app-select-car',
@@ -12,9 +11,9 @@ import {selectedCar} from "../../utils/store";
 export class SelectCarComponent implements OnInit {
 
   searchTerm: string = '';
-  cars: Car[] = [];
+  cars: CarModel[] = [];
 
-  selectedCar: Car | null = null;
+  selectedCar: CarModel | null = null;
 
   //subscribtions
   carsSub!: Subscription;
@@ -25,21 +24,21 @@ export class SelectCarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.carsSub = this.car_.getCars().subscribe((data: Car[]) => {
+    this.carsSub = this.car_.getCars().subscribe((data: CarModel[]) => {
       this.cars = data;
     });
-    this.selectedCarSub = this.car_.observeSelectedCar().subscribe((data: Car) => {
+    this.selectedCarSub = this.car_.observeSelectedCar().subscribe((data: CarModel) => {
       this.selectedCar = data;
     });
   }
 
   search(){
-    this.carsSub = this.car_.getCars(this.searchTerm).subscribe((data: Car[]) => {
+    this.carsSub = this.car_.getCars(this.searchTerm).subscribe((data: CarModel[]) => {
       this.cars = data;
     });
   }
 
-  isCarSelected(car: Car): boolean {
+  isCarSelected(car: CarModel): boolean {
     if(this.selectedCar){
       return car === this.selectedCar;
     }
@@ -51,7 +50,7 @@ export class SelectCarComponent implements OnInit {
     this.selectedCarSub.unsubscribe();
   }
 
-  selectCar(car: Car) {
+  selectCar(car: CarModel) {
     this.car_.selectCar(car);
   }
 }

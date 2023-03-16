@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as L from 'leaflet';
-import {MapService} from "../../services/map/map.service";
+import {MapService} from "../map.service";
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',

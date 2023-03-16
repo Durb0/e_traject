@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, timeout} from "rxjs";
 import {DistanceService} from "../distance/distance.service";
-import {MapService} from "../map/map.service";
+import {MapService} from "../../modules/map/map.service";
 
 
 @Injectable({
@@ -16,7 +16,8 @@ export class TrajectService {
     private mapService: MapService
   ) { }
 
-  url = "https://ws-python.vercel.app"
+  #url = "https://ws-python.vercel.app"
+  url = "http://localhost:8000/?wsdl"
 
 
     calculateTraject(start_lng: number, start_lat: number, finish_lng: number, finish_lat: number, range: number){

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import { distanceSubject} from "../../utils/store";
+import { distanceSubject} from "../../app.store";
 
 @Injectable({
   providedIn: 'root'

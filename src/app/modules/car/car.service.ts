@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Apollo, ApolloBase, gql} from "apollo-angular";
 import {map, Observable} from "rxjs";
-import {Car} from "../../model/car";
-import { selectedCar} from "../../utils/store";
+import {CarModel} from "./car.model";
+import { selectedCar} from "../../app.store";
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +56,7 @@ export class CarService {
     this.apollo = this.apollo_.use('chargetrip');
   }
 
-  getCars(searchTerms:string = ""): Observable<Car[]>{
+  getCars(searchTerms:string = ""): Observable<CarModel[]>{
     return this.apollo.query({
       query: this.generateQuery(searchTerms)
     }).pipe(
@@ -78,19 +78,19 @@ export class CarService {
     );
   }
 
-  observeSelectedCar(): Observable<Car>{
+  observeSelectedCar(): Observable<CarModel>{
     return selectedCar.asObservable();
   }
 
-  getSelectedCar(): Promise<Car>{
+  getSelectedCar(): Promise<CarModel>{
     return new Promise((resolve, reject) => {
-      selectedCar.subscribe((car: Car) => {
+      selectedCar.subscribe((car: CarModel) => {
         resolve(car);
       });
     });
   }
 
-  selectCar(car: Car){
+  selectCar(car: CarModel){
     selectedCar.next(car);
   }
 
